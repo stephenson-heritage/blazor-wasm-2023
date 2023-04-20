@@ -1,0 +1,23 @@
+@inject HttpClient Http
+
+<div>
+    @if (RandUser != null)
+    {
+        @RandUser.Results[0].Name.First
+    }
+</div>
+
+@code {
+
+    private RandomUsers? RandUser { get; set; } = default!;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Console.WriteLine("Fetching data...");
+
+        RandUser = await Http.GetFromJsonAsync<RandomUsers>("https://randomuser.me/api/?results=1");
+
+        StateHasChanged();
+    }
+
+}

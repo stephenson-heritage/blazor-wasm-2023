@@ -1,0 +1,16 @@
+<div>
+    <button id="btnClick" @onclick="ToggleMessage">Click me</button>
+
+    <div style="@Style">@Message</div>
+</div>
+@code {
+    [Parameter]
+    public string Message { get; set; } = "Hello World";
+
+    public string Style { get; set; } = "display: none;";
+
+    public void ToggleMessage()
+    {
+        Style = Style == "display: block" ? "display: none" : "display: block";
+    }
+}
