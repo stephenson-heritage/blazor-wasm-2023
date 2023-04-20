@@ -1,0 +1,29 @@
+@page "/auto"
+@inject IJSRuntime JS
+
+<PageTitle>Auto Page</PageTitle>
+
+<button @onclick="DoJavaScript">Click!</button>
+
+<input type="number" @bind="A" />
+<input type="number" @bind="B" />
+
+<div @ref="CalcResult">fdfgdgdf</div>
+
+@code {
+
+    private int A { get; set; } = 2;
+    private int B { get; set; } = 8;
+
+    private int Result { get; set; } = 0;
+    private ElementReference CalcResult;
+
+
+    public async void DoJavaScript()
+    {
+        await JS.InvokeVoidAsync("consoleMessage", "Hello from C#!", "warning");
+
+        Result = await JS.InvokeAsync<int>("addInts", A, B, CalcResult);
+    }
+
+}
